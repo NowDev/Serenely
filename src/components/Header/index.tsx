@@ -24,3 +24,5 @@ const ContainerHeader = styled.div`
     width: max-content;
   }
 `
+
+export default Header

@@ -36,3 +36,4 @@ const ContainerFooter = styled.div`
     align-items: center;
   }
 `
+export default Footer
