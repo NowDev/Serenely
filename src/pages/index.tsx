@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
 
 export default function Home() {
@@ -8,12 +9,10 @@ export default function Home() {
       <ContainerRoot>
         <main>
           <h1 className="title">
-            Welcome to <a href="https://nextjs.org">Next.js!</a>
+            Welcome to <a href="https://github.com/NowDev">Serenely!</a>
           </h1>
 
-          <p className="description">
-            Get started by editing <code>pages/index.js</code>
-          </p>
+          <p className="description">Get started by listening something!</p>
 
           <div className="grid">
             <a href="https://nextjs.org/docs" className="card">
@@ -40,29 +39,7 @@ export default function Home() {
             </a>
           </div>
         </main>
-        <footer>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Powered by <img src="/vercel.svg" alt="Vercel" className="logo" />
-          </a>
-        </footer>
-
-        <style jsx global>{`
-          html,
-          body {
-            padding: 0;
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
-              Droid Sans, Helvetica Neue, sans-serif;
-          }
-
-          * {
-            box-sizing: border-box;
-          }
-        `}</style>
+        <Footer />
       </ContainerRoot>
     </>
   )
@@ -80,25 +57,6 @@ const ContainerRoot = styled.div`
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  footer {
-    width: 100%;
-    height: 100px;
-    border-top: 1px solid #eaeaea;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  footer img {
-    margin-left: 0.5rem;
-  }
-
-  footer a {
-    display: flex;
     justify-content: center;
     align-items: center;
   }
@@ -182,10 +140,6 @@ const ContainerRoot = styled.div`
     margin: 0;
     font-size: 1.25rem;
     line-height: 1.5;
-  }
-
-  .logo {
-    height: 1em;
   }
 
   @media (max-width: 600px) {
