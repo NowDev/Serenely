@@ -1,9 +1,11 @@
 import styled from 'styled-components'
+import { useRouter } from 'next/dist/client/router'
 
 export const Header: React.FC = () => {
+  const router = useRouter()
   return (
     <ContainerHeader>
-      <div className="content">
+      <div className="content" onClick={() => router.replace('/')}>
         <p>Serenely</p>
       </div>
     </ContainerHeader>
@@ -22,6 +24,7 @@ const ContainerHeader = styled.div`
   }
   .content {
     width: max-content;
+    cursor: pointer;
   }
 `
 

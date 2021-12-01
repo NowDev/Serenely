@@ -2,12 +2,13 @@ import styled from 'styled-components'
 interface PropsSoundCard {
   title: string
   description: string
+  href?: string
 }
 export const SoundCard: React.FC<PropsSoundCard> = props => {
   return (
     <>
       <SoundCardContainer>
-        <a className="card">
+        <a className="card" href={props?.href}>
           <h3>{props.title}</h3>
           <p>{props.description}</p>
         </a>
