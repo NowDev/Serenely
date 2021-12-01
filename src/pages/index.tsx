@@ -9,15 +9,15 @@ export default function Home() {
       <Header />
       <ContainerRoot>
         <main>
-          <h1 className="title">
+          {/* <h1 className="title">
             Welcome to <a href="https://github.com/NowDev">Serenely!</a>
           </h1>
 
-          <p className="description">Get started by listening something!</p>
+          <p className="description">Get started by listening something!</p> */}
 
           <SoundCard title="Start" description="Click here to play something!" href="/listen" />
         </main>
-        <Footer />
+        {/* <Footer /> */}
       </ContainerRoot>
     </>
   )
@@ -30,6 +30,7 @@ const ContainerRoot = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #90caf9;
   main {
     padding: 5rem 0;
     flex: 1;

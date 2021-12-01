@@ -18,7 +18,7 @@ export const SoundCard: React.FC<PropsSoundCard> = props => {
 }
 
 const SoundCardContainer = styled.div`
-  width: 12rem;
+  /* width: 12rem; */
   margin-bottom: 0.6rem;
   .card {
     display: inline-flex;
@@ -32,24 +32,29 @@ const SoundCardContainer = styled.div`
     transition: opacity 0.2s ease-in-out 0s;
     cursor: pointer;
     position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .card:hover {
     opacity: 1;
+    color: #5c6bc0;
+    border-color: #5c6bc0;
   }
   .card:focus,
   .card:active {
-    color: #0070f3;
-    border-color: #0070f3;
+    color: #5c6bc0;
+    border-color: #5c6bc0;
   }
 
   .card h3 {
     margin: 0 0 1rem 0;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   .card p {
     margin: 0;
-    font-size: 1.1rem;
+    font-size: 0.8rem;
   }
 `

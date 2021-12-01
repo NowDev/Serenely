@@ -39,7 +39,7 @@ const ContainerRoot = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #7986cb;
+  background-color: #8e99f3;
   main {
     width: 95%;
     padding: 5rem 0;
