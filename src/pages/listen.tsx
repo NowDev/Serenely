@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import { SoundCard } from '../components/SoundCard'
+import PageLayout from '../components/PageLayout'
 
 export default function Listen() {
   return (
@@ -12,17 +13,19 @@ export default function Listen() {
           <p className="description">Get started by listening something!</p>
 
           <div className="container">
-            <div className="wrapper">
-              <SoundCard title="CoffeeShop" description="People talking and some machinery" />
-              <SoundCard title="Thunderstorm" description="Thunders and rain, not so quietly..." />
-              <SoundCard title="Train" description="The sound a train on rails" />
-              <SoundCard title="Rain" description="Classic sound of a light rain" />
-              <SoundCard title="Tropical Forest" description="Calm sounds of nature" />
-              <SoundCard title="CoffeeShop" description="People talking and some machinery" />
-              <SoundCard title="Thunderstorm" description="Thunders and rain, not so quietly..." />
-              <SoundCard title="Train" description="The sound a train on rails" />
-              <SoundCard title="Rain" description="Classic sound of a light rain" />
-              <SoundCard title="Tropical Forest" description="Calm sounds of nature" />
+            <div className="grid">
+              <div className="wrapper">
+                <SoundCard title="CoffeeShop" description="People talking and some machinery" />
+                <SoundCard title="Thunderstorm" description="Thunders and rain, not so quietly..." />
+                <SoundCard title="Train" description="The sound a train on rails" />
+                <SoundCard title="Rain" description="Classic sound of a light rain" />
+                <SoundCard title="Tropical Forest" description="Calm sounds of nature" />
+                <SoundCard title="CoffeeShop" description="People talking and some machinery" />
+                <SoundCard title="Thunderstorm" description="Thunders and rain, not so quietly..." />
+                <SoundCard title="Train" description="The sound a train on rails" />
+                <SoundCard title="Rain" description="Classic sound of a light rain" />
+                <SoundCard title="Tropical Forest" description="Calm sounds of nature" />
+              </div>
             </div>
           </div>
         </main>
@@ -81,7 +84,7 @@ const ContainerRoot = styled.div`
   }
 
   .description {
-    line-height: 1.5;
+    line-height: 1.2;
     font-size: 1.5rem;
   }
 
@@ -95,32 +98,58 @@ const ContainerRoot = styled.div`
   }
 
   .grid {
-    margin: 84px auto auto;
-    padding-bottom: 60px;
-    max-width: 268px;
+    margin: 10px auto auto;
+    padding-bottom: 40px;
   }
   @media (min-width: 576px) {
     .grid {
-      max-width: 540px;
+      max-width: 500px;
+      margin: 50px auto auto;
     }
   }
   @media (min-width: 768px) {
     .grid {
-      max-width: 584px;
+      max-width: 650px;
+      margin: 84px auto auto;
+    }
+  }
+  @media (min-width: 992px) {
+    .grid {
+      max-width: 800px;
+      margin: 84px auto auto;
+    }
+  }
+  @media (min-width: 1200px) {
+    .grid {
+      max-width: 1000px;
+      margin: 84px auto auto;
     }
   }
 
   .wrapper {
-    margin: 0px -24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0.5rem;
+    grid-column-gap: 0.5rem;
+    padding-bottom: 5rem;
+    justify-items: center;
   }
-  @media (min-width: 576px) {
-    .wrapper {
-      margin: 0px -16.5px;
-    }
-  }
+  // Tablets
   @media (min-width: 768px) {
     .wrapper {
-      margin: 0px -24px;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+  // Desktop HD
+  @media (min-width: 992px) {
+    .wrapper {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+  // Desktop Full HD
+  @media (min-width: 1200px) {
+    .wrapper {
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     }
   }
 `

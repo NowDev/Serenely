@@ -17,9 +17,14 @@ function Serenely({ Component, pageProps }: AppProps): JSX.Element {
           font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
             Droid Sans, Helvetica Neue, sans-serif;
         }
+        *::-webkit-scrollbar {
+          display: none;
+        }
 
         * {
           box-sizing: border-box;
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
       `}</style>
     </>
