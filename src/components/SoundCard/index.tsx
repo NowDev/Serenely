@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Slider from '@mui/material/Slider'
+import SerenelyPlayer from '../SerenelyPlayer'
 interface PropsSoundCard {
   title: string
   description?: string
   enabled?: boolean
-  href?: string
+  uuid: string
 }
 
 export const SoundCard: React.FC<PropsSoundCard> = props => {
@@ -30,11 +31,10 @@ export const SoundCard: React.FC<PropsSoundCard> = props => {
           <h3>{props.title}</h3>
         </a>
       </div>
-      {enabled && (
-        <SliderContainer>
-          <Slider aria-label="Volume" value={volume} onChange={volumeChange} />
-        </SliderContainer>
-      )}
+      <SerenelyPlayer uuid={props.uuid} enabled={enabled} volume={volume} />
+      <SliderContainer enabled={enabled}>
+        <Slider aria-label="Volume" value={volume} onChange={volumeChange} />
+      </SliderContainer>
     </SoundCardContainer>
   )
 }
@@ -51,20 +51,15 @@ const SoundCardContainer = styled.div<{ enabled: boolean }>`
   border-radius: 1rem;
   border-color: ${props => (props.enabled ? '#4a63ec' : '#424242ba')};
   :hover {
-    border-color: #4a63ec;
+    border-color: #6f82f0;
     .card {
       opacity: 1;
-      color: #4a63ec;
-      border-color: #4a63ec;
+      color: #6f82f0;
+      border-color: #6f82f0;
       h3 {
-        color: #4a63ec;
+        color: #6f82f0;
       }
     }
-  }
-  :focus,
-  :active {
-    color: #4a63ec;
-    border-color: #4a63ec;
   }
 
   .cardRoot {
@@ -97,7 +92,8 @@ const SoundCardContainer = styled.div<{ enabled: boolean }>`
     font-size: 0.8rem;
   }
 `
-const SliderContainer = styled.div`
+const SliderContainer = styled.div<{ enabled: boolean }>`
   margin: 0px 0.5rem 0px 0.5rem;
   padding-bottom: 0.5rem;
+  display: ${props => (props.enabled ? 'block' : 'none')};
 `

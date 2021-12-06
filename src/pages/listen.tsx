@@ -14,16 +14,16 @@ export default function Listen() {
           <div className="container">
             <div className="grid">
               <div className="wrapper">
-                <SoundCard title="CoffeeShop" description="People talking and some machinery" />
-                <SoundCard title="Thunderstorm" description="Thunders and rain, not so quietly..." />
-                <SoundCard title="Train" description="The sound a train on rails" enabled={true} />
-                <SoundCard title="Rain" description="Classic sound of a light rain" />
-                <SoundCard title="Tropical Forest" description="Calm sounds of nature" />
-                <SoundCard title="CoffeeShop" description="People talking and some machinery" />
-                <SoundCard title="Thunderstorm" description="Thunders and rain, not so quietly..." />
-                <SoundCard title="Train" description="The sound a train on rails" />
-                <SoundCard title="Rain" description="Classic sound of a light rain" />
-                <SoundCard title="Tropical Forest" description="Calm sounds of nature" />
+                <SoundCard uuid="coffeeshop" title="CoffeeShop" description="People talking and some machinery" />
+                <SoundCard uuid="coffeeshop" title="Thunderstorm" description="Thunders and rain, not so quietly..." />
+                <SoundCard uuid="coffeeshop" title="Train" description="The sound a train on rails" enabled={false} />
+                <SoundCard uuid="coffeeshop" title="Rain" description="Classic sound of a light rain" />
+                <SoundCard uuid="coffeeshop" title="Tropical Forest" description="Calm sounds of nature" />
+                <SoundCard uuid="coffeeshop" title="CoffeeShop" description="People talking and some machinery" />
+                <SoundCard uuid="coffeeshop" title="Thunderstorm" description="Thunders and rain, not so quietly..." />
+                <SoundCard uuid="coffeeshop" title="Train" description="The sound a train on rails" />
+                <SoundCard uuid="coffeeshop" title="Rain" description="Classic sound of a light rain" />
+                <SoundCard uuid="coffeeshop" title="Tropical Forest" description="Calm sounds of nature" />
               </div>
             </div>
           </div>

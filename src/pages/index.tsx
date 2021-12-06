@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
-import { SoundCard } from '../components/SoundCard'
 
 export default function Home() {
   return (
@@ -9,15 +8,15 @@ export default function Home() {
       <Header />
       <ContainerRoot>
         <main>
-          {/* <h1 className="title">
+          <h1 className="title">
             Welcome to <a href="https://github.com/NowDev">Serenely!</a>
           </h1>
 
-          <p className="description">Get started by listening something!</p> */}
-
-          <SoundCard title="Start" description="Click here to play something!" href="/listen" />
+          <p className="description">
+            Get started by listening <a href="/listen">something!</a>
+          </p>
         </main>
-        {/* <Footer /> */}
+        <Footer />
       </ContainerRoot>
     </>
   )
