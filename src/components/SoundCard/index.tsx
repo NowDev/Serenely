@@ -33,7 +33,35 @@ export const SoundCard: React.FC<PropsSoundCard> = props => {
       </div>
       <SerenelyPlayer uuid={props.uuid} enabled={enabled} volume={volume} />
       <SliderContainer enabled={enabled}>
-        <Slider aria-label="Volume" value={volume} onChange={volumeChange} />
+        <Slider
+          aria-label="Volume"
+          size="small"
+          value={volume}
+          onChange={volumeChange}
+          sx={{
+            color: '#4a63ec',
+            height: 4,
+            '& .MuiSlider-thumb': {
+              width: 8,
+              height: 8,
+              transition: '0.3s cubic-bezier(.47,1.64,.41,.8)',
+              '&:before': {
+                boxShadow: '0 2px 12px 0 #6f82f0'
+              },
+              '&:hover, &.Mui-focusVisible': {
+                boxShadow: `0px 0px 0px 8px rgb(0 0 0 / 16%)'
+                }`
+              },
+              '&.Mui-active': {
+                width: 20,
+                height: 20
+              }
+            },
+            '& .MuiSlider-rail': {
+              opacity: 0.28
+            }
+          }}
+        />
       </SliderContainer>
     </SoundCardContainer>
   )
