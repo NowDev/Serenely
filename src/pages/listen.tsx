@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import { SoundCard } from '../components/SoundCard'
-import PageLayout from '../components/PageLayout'
 
 export default function Listen() {
   return (
@@ -17,7 +16,7 @@ export default function Listen() {
               <div className="wrapper">
                 <SoundCard title="CoffeeShop" description="People talking and some machinery" />
                 <SoundCard title="Thunderstorm" description="Thunders and rain, not so quietly..." />
-                <SoundCard title="Train" description="The sound a train on rails" />
+                <SoundCard title="Train" description="The sound a train on rails" enabled={true} />
                 <SoundCard title="Rain" description="Classic sound of a light rain" />
                 <SoundCard title="Tropical Forest" description="Calm sounds of nature" />
                 <SoundCard title="CoffeeShop" description="People talking and some machinery" />
@@ -42,7 +41,7 @@ const ContainerRoot = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #8e99f3;
+  background-color: #c8cfff;
   main {
     width: 95%;
     padding: 5rem 0;

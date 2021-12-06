@@ -1,50 +1,63 @@
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip'
-
-const BootstrapTooltip = styled(({ className, ...props }: TooltipProps) => (
-  <Tooltip {...props} arrow classes={{ popper: className }} />
-))(() => ({
-  [`& .${tooltipClasses.arrow}`]: {
-    color: 'rgba(0, 0, 0, 0.45)'
-  },
-  [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: 'rgba(0, 0, 0, 0.45)'
-  }
-}))
+import Slider from '@mui/material/Slider'
 interface PropsSoundCard {
   title: string
   description?: string
+  enabled?: boolean
   href?: string
 }
+
 export const SoundCard: React.FC<PropsSoundCard> = props => {
+  const [enabled, setEnabled] = useState(props.enabled || false)
+  const [volume, setVolume] = useState(50)
+
+  const volumeChange = (event: Event, value: number | number[]) => {
+    setVolume(value as number)
+  }
+  function handleClick() {
+    setEnabled(!enabled)
+  }
+
   return (
-    <>
-      <SoundCardContainer>
-        <a className="card" href={props?.href}>
-          <BootstrapTooltip title={props?.description}>
-            <h3>{props.title}</h3>
-          </BootstrapTooltip>
+    <SoundCardContainer onClick={handleClick} enabled={enabled}>
+      <div className="cardRoot">
+        <a className="card">
+          <h3>{props.title}</h3>
         </a>
-      </SoundCardContainer>
-    </>
+      </div>
+      {enabled && <Slider aria-label="Volume" value={volume} onChange={volumeChange} />}
+    </SoundCardContainer>
   )
 }
 
-const SoundCardContainer = styled.div`
+const SoundCardContainer = styled.div<{ enabled: boolean }>`
   width: 8rem;
   height: 8rem;
   margin-bottom: 1.5rem;
-  outline: auto;
+  display: flex;
+  flex-direction: column;
+  border-style: solid;
+  border-width: 0.15rem;
+  border-radius: 1rem;
+  border-color: ${props => (props.enabled ? '#4a63ec' : '#424242ba')};
+  :hover {
+    border-color: #4a63ec;
+  }
+  .cardRoot {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
   .card {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
-    -webkit-box-align: center;
     align-items: center;
     width: 100%;
     opacity: 0.5;
     transition: opacity 0.2s ease-in-out 0s;
     cursor: pointer;
-    position: relative;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -52,18 +65,17 @@ const SoundCardContainer = styled.div`
 
   .card:hover {
     opacity: 1;
-    color: #5c6bc0;
-    border-color: #5c6bc0;
+    color: #4a63ec;
+    border-color: #4a63ec;
   }
   .card:focus,
   .card:active {
-    color: #5c6bc0;
-    border-color: #5c6bc0;
+    color: #4a63ec;
+    border-color: #4a63ec;
   }
 
   .card h3 {
-    margin: 0 0 1rem 0;
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   .card p {
