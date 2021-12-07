@@ -12,11 +12,16 @@ export default function Listen() {
       <ContainerRoot color={colors.color}>
         <main>
           <p className="description">Get started by listening something!</p>
+          <p>{colors.color}</p>
           <div className="container">
             <div className="grid">
               <div className="wrapper">
                 <SoundCard uuid="coffeeshop" title="CoffeeShop" description="People talking and some machinery" />
-                <SoundCard uuid="coffeeshop" title="Thunderstorm" description="Thunders and rain, not so quietly..." />
+                <SoundCard
+                  uuid="thunderstorm"
+                  title="Thunderstorm"
+                  description="Thunders and rain, not so quietly..."
+                />
                 <SoundCard uuid="coffeeshop" title="Train" description="The sound a train on rails" enabled={false} />
                 <SoundCard uuid="coffeeshop" title="Rain" description="Classic sound of a light rain" />
                 <SoundCard uuid="coffeeshop" title="Tropical Forest" description="Calm sounds of nature" />
@@ -42,7 +47,8 @@ const ContainerRoot = styled.div<{ color: string }>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${props => props.color};
+  /* background-color: ${props => props.color}; */
+  background-color: #004c8c;
   main {
     width: 95%;
     padding: 5rem 0;

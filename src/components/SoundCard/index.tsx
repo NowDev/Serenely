@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import Slider from '@mui/material/Slider'
+import { BsCloudLightningRain } from 'react-icons/bs'
+import { GiSoundWaves } from 'react-icons/gi'
 import SerenelyPlayer from '../SerenelyPlayer'
 interface PropsSoundCard {
   title: string
@@ -24,12 +26,24 @@ export const SoundCard: React.FC<PropsSoundCard> = props => {
     }
   }
 
+  const CardIcon: React.FC = () => {
+    switch (props.uuid) {
+      case 'thunderstorm':
+        return <BsCloudLightningRain />
+      default:
+        return <GiSoundWaves />
+    }
+  }
+
   return (
     <SoundCardContainer onClick={() => handleClick(true)} enabled={enabled}>
       <div className="cardRoot">
         <a className="card" onClick={() => handleClick(false)}>
           <h3>{props.title}</h3>
         </a>
+        <div>
+          <CardIcon />
+        </div>
       </div>
       <SerenelyPlayer uuid={props.uuid} enabled={enabled} volume={volume} />
       <SliderContainer enabled={enabled}>
@@ -78,6 +92,8 @@ const SoundCardContainer = styled.div<{ enabled: boolean }>`
   border-width: 0.15rem;
   border-radius: 1rem;
   border-color: ${props => (props.enabled ? '#4a63ec' : '#424242ba')};
+  transition: opacity 0.2s ease-in-out 0s;
+  transition: border-color 0.2s ease-in-out 0s;
   :hover {
     border-color: #6f82f0;
     .card {
