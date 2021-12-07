@@ -2,15 +2,16 @@ import styled from 'styled-components'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import { SoundCard } from '../components/SoundCard'
+import { useColors } from '../hooks/useColors'
 
 export default function Listen() {
+  const colors = useColors()
   return (
     <>
       <Header />
-      <ContainerRoot>
+      <ContainerRoot color={colors.color}>
         <main>
           <p className="description">Get started by listening something!</p>
-
           <div className="container">
             <div className="grid">
               <div className="wrapper">
@@ -34,14 +35,14 @@ export default function Listen() {
   )
 }
 
-const ContainerRoot = styled.div`
+const ContainerRoot = styled.div<{ color: string }>`
   min-height: 100vh;
   padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #c8cfff;
+  background-color: ${props => props.color};
   main {
     width: 95%;
     padding: 5rem 0;
