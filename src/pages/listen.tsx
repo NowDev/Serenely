@@ -27,7 +27,7 @@ export default function Listen() {
                 <SoundCard uuid="coffeeshop" title="Tropical Forest" description="Calm sounds of nature" />
                 <SoundCard uuid="coffeeshop" title="CoffeeShop" description="People talking and some machinery" />
                 <SoundCard uuid="coffeeshop" title="Thunderstorm" description="Thunders and rain, not so quietly..." />
-                <SoundCard uuid="coffeeshop" title="Train" description="The sound a train on rails" />
+                <SoundCard uuid="train" title="Train" description="The sound a train on rails" />
                 <SoundCard uuid="coffeeshop" title="Rain" description="Classic sound of a light rain" />
                 <SoundCard uuid="coffeeshop" title="Tropical Forest" description="Calm sounds of nature" />
               </div>
