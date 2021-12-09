@@ -48,7 +48,7 @@ const ContainerRoot = styled.div<{ color: string }>`
   justify-content: center;
   align-items: center;
   /* background-color: ${props => props.color}; */
-  background-color: #004c8c;
+  background-color: #4985b6;
   main {
     width: 95%;
     padding: 5rem 0;

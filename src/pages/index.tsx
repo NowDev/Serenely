@@ -13,7 +13,7 @@ export default function Home() {
           </h1>
 
           <p className="description">
-            Get started by listening <a href="/listen">something!</a>
+            Get started by <a href="/listen">listening something!</a>
           </p>
         </main>
         <Footer />

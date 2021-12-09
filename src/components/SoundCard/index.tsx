@@ -10,10 +10,22 @@ interface PropsSoundCard {
   description?: string
   enabled?: boolean
   uuid: string
+  colors?: ColorProps
+}
+
+interface ColorProps {
+  disabledColor: string
+  enabledColor: string
+  hoverColor: string
 }
 
 export const SoundCard: React.FC<PropsSoundCard> = props => {
   const [enabled, setEnabled] = useState(props.enabled || false)
+  const [colors, setColors] = useState<ColorProps>({
+    disabledColor: props.colors?.disabledColor || '#7ad8f0d6',
+    enabledColor: props.colors?.enabledColor || '#3febce',
+    hoverColor: props.colors?.hoverColor || '#52d3d3'
+  })
   const [volume, setVolume] = useState(50)
 
   const volumeChange = (event: Event, value: number | number[]) => {
@@ -41,12 +53,12 @@ export const SoundCard: React.FC<PropsSoundCard> = props => {
   }
 
   return (
-    <SoundCardContainer onClick={() => handleClick(true)} enabled={enabled}>
+    <SoundCardContainer onClick={() => handleClick(true)} enabled={enabled} colors={colors}>
       <div className="cardRoot">
         <a className="card" onClick={() => handleClick(false)}>
           <h3>{props.title}</h3>
         </a>
-        <div>
+        <div className="icon" onClick={() => handleClick(false)}>
           <CardIcon />
         </div>
       </div>
@@ -58,14 +70,14 @@ export const SoundCard: React.FC<PropsSoundCard> = props => {
           value={volume}
           onChange={volumeChange}
           sx={{
-            color: '#4a63ec',
+            color: colors.enabledColor,
             height: 4,
             '& .MuiSlider-thumb': {
               width: 8,
               height: 8,
               transition: '0.3s cubic-bezier(.47,1.64,.41,.8)',
               '&:before': {
-                boxShadow: '0 2px 12px 0 #6f82f0'
+                boxShadow: `0 2px 12px 0 ${colors.enabledColor}`
               },
               '&:hover, &.Mui-focusVisible': {
                 boxShadow: `0px 0px 0px 8px rgb(0 0 0 / 16%)'
@@ -86,7 +98,7 @@ export const SoundCard: React.FC<PropsSoundCard> = props => {
   )
 }
 
-const SoundCardContainer = styled.div<{ enabled: boolean }>`
+const SoundCardContainer = styled.div<{ enabled: boolean; colors: ColorProps }>`
   width: 8rem;
   height: 8rem;
   margin-bottom: 1.5rem;
@@ -96,17 +108,23 @@ const SoundCardContainer = styled.div<{ enabled: boolean }>`
   border-style: solid;
   border-width: 0.15rem;
   border-radius: 1rem;
-  border-color: ${props => (props.enabled ? '#4a63ec' : '#424242ba')};
+  border-color: ${props => (props.enabled ? props.colors.enabledColor : props.colors.disabledColor)};
   transition: opacity 0.2s ease-in-out 0s;
   transition: border-color 0.2s ease-in-out 0s;
   :hover {
-    border-color: #6f82f0;
+    border-color: ${props => props.colors.hoverColor};
     .card {
       opacity: 1;
-      color: #6f82f0;
-      border-color: #6f82f0;
+      color: ${props => props.colors.hoverColor};
+      border-color: ${props => props.colors.hoverColor};
       h3 {
-        color: #6f82f0;
+        color: ${props => props.colors.hoverColor};
+      }
+    }
+    .cardRoot {
+      .icon {
+        opacity: 1;
+        color: ${props => props.colors.hoverColor};
       }
     }
   }
@@ -116,6 +134,19 @@ const SoundCardContainer = styled.div<{ enabled: boolean }>`
     height: 100%;
     display: flex;
     align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    .icon {
+      width: 1.8rem;
+      height: 1.8rem;
+      cursor: pointer;
+      opacity: ${props => (props.enabled ? '0.8' : '0.5')};
+      color: ${props => (props.enabled ? props.colors.enabledColor : props.colors.disabledColor)};
+      svg {
+        width: 1.8rem;
+        height: 1.8rem;
+      }
+    }
   }
   .card {
     display: flex;
@@ -133,7 +164,7 @@ const SoundCardContainer = styled.div<{ enabled: boolean }>`
 
   .card h3 {
     font-size: 1rem;
-    color: ${props => (props.enabled ? '#4a63ec' : '#424242ba')};
+    color: ${props => (props.enabled ? props.colors.enabledColor : props.colors.disabledColor)};
   }
 
   .card p {
@@ -142,7 +173,7 @@ const SoundCardContainer = styled.div<{ enabled: boolean }>`
   }
 `
 const SliderContainer = styled.div<{ enabled: boolean }>`
-  margin: 0px 0.5rem 0px 0.5rem;
+  margin: 0px 0.8rem 0px 0.8rem;
   padding-bottom: 0.5rem;
   display: ${props => (props.enabled ? 'block' : 'none')};
 `
