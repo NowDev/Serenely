@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import Slider from '@mui/material/Slider'
-import { BsCloudLightningRain } from 'react-icons/bs'
+import { BsCloudLightningRain, BsCloudRain } from 'react-icons/bs'
 import { GiSoundWaves, GiCoffeeCup } from 'react-icons/gi'
 import { BiTrain } from 'react-icons/bi'
 import SerenelyPlayer from '../SerenelyPlayer'
@@ -47,6 +47,8 @@ export const SoundCard: React.FC<PropsSoundCard> = props => {
         return <GiCoffeeCup />
       case 'train':
         return <BiTrain />
+      case 'rain':
+        return <BsCloudRain />
       default:
         return <GiSoundWaves />
     }
