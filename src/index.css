@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@property --color-canvas {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #153e36;
+}
+
+@property --color-panel {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #204a42;
+}
+
+@theme {
+  --font-sans: "Avenir Next", "Avenir", "Segoe UI", sans-serif;
+  --color-canvas: #153e36;
+  --color-panel: #204a42;
+  --color-ink: #f1f4e9;
+  --color-muted: #bbd0c0;
+  --color-accent: #e2edc5;
+}
+
+@layer base {
+  html {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    color-scheme: dark;
+    animation: ambient-palette 180s ease-in-out infinite;
+  }
+  body { margin: 0; min-width: 320px; }
+  button, input, select { font: inherit; }
+  button:not(:disabled), select { cursor: pointer; }
+  button:disabled { cursor: not-allowed; }
+  ::selection { background: var(--color-accent); color: var(--color-canvas); }
+  :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 5px; }
+  input[type="range"] { accent-color: var(--color-accent); cursor: pointer; }
+  input[type="range"]:disabled { cursor: default; }
+  dialog::backdrop { background: rgb(7 31 26 / 70%); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { animation: none; }
+  }
+}
+
+@keyframes ambient-palette {
+  0%, 100% { --color-canvas: #153e36; --color-panel: #204a42; }
+  16.667% { --color-canvas: #163c45; --color-panel: #214851; }
+  33.333% { --color-canvas: #1c304d; --color-panel: #283e5a; }
+  50% { --color-canvas: #302d4b; --color-panel: #3e3959; }
+  66.667% { --color-canvas: #442d41; --color-panel: #52394f; }
+  83.333% { --color-canvas: #463130; --color-panel: #543e3b; }
+}
