@@ -39,26 +39,79 @@ The background stays dark green when your system requests reduced motion.
 ## Audio
 
 The project includes all 28 Noisli sounds listed in the audio catalog.
-Each local M4A contains the complete HLS playlist.
-The files retain the original AAC audio without re-encoding.
-The mixer streams each local file through a separate Web Audio volume control.
-It does not decode the complete files into memory.
+The original M4A files stay in `audio-sources/`.
+The build splits each file into chunks of at most 1 MiB.
+It copies the audio bytes without re-encoding.
+It checks the SHA-256 hash before and during the split.
+
+The browser requests audio from `/audio/<name>.m4a`.
+A Cloudflare Worker serves the requested byte range from the required chunks.
+The Worker reads one chunk at a time.
+The browser controls buffering and can cancel a request when it has enough data.
+The Worker stops reading chunks when the request is cancelled.
+The mixer keeps its existing playback, loop, and Web Audio volume controls.
+It does not decode complete recordings into memory.
 The master output includes a compressor to control combined peaks.
 
-The original HAR and downloader remain unchanged.
-The HAR is excluded from Git and the production build.
-The development server also blocks access to HAR files.
-The app does not need Noisli cookies, credentials, or network requests during playback.
+The original downloader remains unchanged.
+HAR files are excluded from Git and the production build.
+The development server also blocks direct access to HAR files and source recordings.
+The app does not need Noisli cookies or credentials.
+Playback uses this site's audio routes without requests to Noisli.
+
+## Deploy to Cloudflare
+
+The build creates the website, audio chunks, and Worker in `dist/`.
+It rejects deployment files larger than Cloudflare's 25 MiB asset limit.
+It does not require FFmpeg or R2.
+Audio requests use Workers or Pages Functions quotas.
+Other files use static asset hosting.
+
+For Pages Git integration, use these settings:
+
+| Setting | Value |
+| --- | --- |
+| Branch | `feat/serenely-rebuild` |
+| Build command | `npm run build` |
+| Output directory | `dist` |
+
+Pages uses the generated `_worker.js` and `_routes.json` files.
+The route configuration sends only `/audio/*` requests to the Worker.
+
+For Workers, run this command after Cloudflare authentication:
+
+```sh
+npm run deploy:workers
+```
+
+For Workers Git integration, set the build command to `npm run build`.
+Set the deploy command to `npx wrangler deploy --config wrangler.workers.jsonc`.
+
+For a Pages CLI deployment, run this command:
+
+```sh
+npm run deploy:pages -- --project-name serenely
+```
+
+Use a Workers or Pages deployment with Functions enabled.
+An ordinary static server cannot reconstruct the audio files.
 
 ## Checks
 
 ```sh
 npm run lint
+npm test
 npm run build
-npm run preview
+npm run preview:cloudflare
 ```
 
 The production files are written to `dist/`.
+The Cloudflare preview runs at `http://127.0.0.1:8787`.
+The tests check byte ranges, chunk boundaries, caching, cancellation, and missing chunks.
+These checks do not prove browser playback.
+
+`npm run dev` and `npm run preview` use the same audio handler through a local asset adapter.
+Use the Cloudflare preview to check the deployed asset layout.
 
 Check playback in your browser:
 
@@ -79,7 +132,11 @@ Check playback in your browser:
 - `src/hooks/useTimer.ts`: Timer state and completion.
 - `src/lib/storage.ts`: Browser preference validation and storage.
 - `src/components/`: Shared interface components.
-- `public/audio/`: Complete local recordings and source records.
+- `audio-sources/`: Complete source recordings.
+- `worker/audio.ts`: Audio byte ranges and chunk streaming.
+- `scripts/`: Audio build and local server support.
+- `tests/audio.test.ts`: Audio delivery tests.
+- `wrangler.workers.jsonc`: Cloudflare Workers configuration.
 
 All styles use Tailwind utilities and the single Tailwind entry file.
 All icons come from `react-icons`.
