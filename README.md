@@ -85,7 +85,9 @@ npm run deploy:workers
 ```
 
 For Workers Git integration, set the build command to `npm run build`.
-Set the deploy command to `npx wrangler deploy --config wrangler.workers.jsonc`.
+Set the deploy command to `npx wrangler deploy`.
+Wrangler reads `wrangler.jsonc` and deploys the audio handler with its asset binding.
+Do not deploy only the static files. Audio requests require the Worker.
 
 For a Pages CLI deployment, run this command:
 
@@ -136,7 +138,8 @@ Check playback in your browser:
 - `worker/audio.ts`: Audio byte ranges and chunk streaming.
 - `scripts/`: Audio build and local server support.
 - `tests/audio.test.ts`: Audio delivery tests.
-- `wrangler.workers.jsonc`: Cloudflare Workers configuration.
+- `wrangler.jsonc`: Default Cloudflare Workers configuration.
+- `wrangler.pages.jsonc`: Explicit Cloudflare Pages CLI configuration.
 
 All styles use Tailwind utilities and the single Tailwind entry file.
 All icons come from `react-icons`.

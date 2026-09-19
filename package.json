@@ -9,9 +9,9 @@
     "preview": "vite preview --host 127.0.0.1",
     "lint": "eslint .",
     "test": "node --import tsx --test tests/*.test.ts",
-    "preview:cloudflare": "wrangler dev --config wrangler.workers.jsonc --ip 127.0.0.1",
-    "deploy:workers": "npm run build && wrangler deploy --config wrangler.workers.jsonc",
-    "deploy:pages": "npm run build && wrangler pages deploy dist"
+    "preview:cloudflare": "wrangler dev --ip 127.0.0.1",
+    "deploy:workers": "npm run build && wrangler deploy",
+    "deploy:pages": "npm run build && wrangler pages deploy --config wrangler.pages.jsonc"
   },
   "dependencies": {
     "react": "^19.1.0",

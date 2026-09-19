@@ -1,5 +1,5 @@
-import { readdir, stat, writeFile } from 'node:fs/promises'
-import { resolve } from 'node:path'
+import { readdir, rm, stat, writeFile } from 'node:fs/promises'
+import { basename, resolve } from 'node:path'
 import { build } from 'esbuild'
 import { prepareAudio } from './audio-assets'
 
@@ -19,8 +19,12 @@ await build({
   minify: true,
 })
 await writeFile(resolve(outputDirectory, '_routes.json'), JSON.stringify({ version: 1, include: ['/audio/*'], exclude: [] }))
-await writeFile(resolve(outputDirectory, '.assetsignore'), '_worker.js\n_routes.json\n')
+await writeFile(resolve(outputDirectory, '.assetsignore'), '_worker.js\n_routes.json\n**/.DS_Store\n')
 for (const file of await readdir(outputDirectory, { recursive: true })) {
+  if (basename(file) === '.DS_Store') {
+    await rm(resolve(outputDirectory, file))
+    continue
+  }
   const info = await stat(resolve(outputDirectory, file))
   if (info.isFile() && info.size > 25 * 1024 * 1024) throw new Error(`Deployment file exceeds 25 MiB: ${file}`)
 }
