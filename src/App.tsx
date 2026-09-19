@@ -37,9 +37,9 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-dvh font-sans">
-      <header className="border-b border-white/10 px-5 sm:px-10">
-        <div className="mx-auto flex h-21 max-w-7xl items-center justify-between gap-3">
+    <div className="min-h-dvh pt-21 font-sans">
+      <header className="fixed inset-x-0 top-0 z-30 h-21 border-b border-white/10 bg-canvas px-5 sm:px-10">
+        <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-3">
           <a href={import.meta.env.BASE_URL} aria-label="Serenely home" className="flex items-center gap-2.5 rounded text-ink">
             <PiLeafLight size={29} className="text-accent" aria-hidden="true" />
             <span className="text-[1.5rem] font-medium tracking-[-0.055em] sm:text-[1.75rem]">serenely</span>
