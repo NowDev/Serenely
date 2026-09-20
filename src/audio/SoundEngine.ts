@@ -1,5 +1,6 @@
 import { sounds } from '../data/sounds'
 import type { MixLevels, Sound, SoundId } from '../data/sounds'
+import { requestPlaybackSession } from './playbackSession'
 
 export type SoundStatus = 'loading' | 'ready' | 'error'
 type Channel = {
@@ -14,6 +15,7 @@ type Channel = {
 export class SoundEngine {
   private context?: AudioContext
   private master?: GainNode
+  private restoreAudioSession?: () => void
   private channels = new Map<SoundId, Channel>()
   private levels: MixLevels = {}
   private playing = false
@@ -26,6 +28,7 @@ export class SoundEngine {
 
   async unlock() {
     if (!this.context) {
+      this.restoreAudioSession = requestPlaybackSession()
       this.context = new AudioContext()
       this.master = this.context.createGain()
       const limiter = this.context.createDynamicsCompressor()
@@ -136,5 +139,7 @@ export class SoundEngine {
     void this.context?.close()
     this.context = undefined
     this.master = undefined
+    this.restoreAudioSession?.()
+    this.restoreAudioSession = undefined
   }
 }

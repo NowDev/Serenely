@@ -59,6 +59,32 @@ The development server also blocks direct access to HAR files and source recordi
 The app does not need Noisli cookies or credentials.
 Playback uses this site's audio routes without requests to Noisli.
 
+## Background playback
+
+The mixer requests the `playback` audio session before it creates the Web Audio context.
+Safari uses this session type for background audio.
+Browsers without the Audio Session API keep their default audio behavior.
+The Media Session API provides play, pause, and stop controls for the full mix where supported.
+The controls show the selected sound names.
+The mixer removes these controls and restores the previous audio session type when it unmounts.
+
+Check this change in Safari on the target iPhone:
+
+1. Reload the updated site.
+2. Select rain and forest without a focus timer.
+3. Go to the Home Screen and listen for one minute.
+4. Open another app without starting other audio.
+5. Lock the screen and listen for at least five minutes.
+6. Pause and resume the mix with the lock screen controls.
+7. Return to Safari and check both sound levels and the master volume.
+8. Remove all sounds and check that playback stops.
+
+Keep the Safari tab open during playback.
+Closing the tab or force-closing Safari ends playback.
+Calls and other audio can interrupt playback.
+The focus timer uses browser timers, which can run late in the background.
+Automated checks do not verify background playback on an iPhone.
+
 ## Deploy to Cloudflare
 
 The build creates the website, audio chunks, and Worker in `dist/`.

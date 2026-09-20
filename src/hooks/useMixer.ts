@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { SoundEngine } from '../audio/SoundEngine'
 import type { SoundStatus } from '../audio/SoundEngine'
+import { bindPlaybackControls, updatePlaybackSession } from '../audio/playbackSession'
+import { sounds } from '../data/sounds'
 import type { MixLevels, SoundId } from '../data/sounds'
 import { readPreferences, writePreferences } from '../lib/storage'
 
@@ -39,6 +41,11 @@ export function useMixer() {
   }, [engine])
 
   const pause = useCallback(() => { cancelPlayRequest(); setPlaying(false) }, [cancelPlayRequest])
+
+  useEffect(() => bindPlaybackControls(play, pause), [play, pause])
+  useEffect(() => {
+    updatePlaybackSession(sounds.filter(sound => levels[sound.id] !== undefined).map(sound => sound.name), playing)
+  }, [levels, playing])
 
   function toggle(id: SoundId) {
     if (levels[id] !== undefined) {
